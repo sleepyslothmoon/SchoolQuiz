@@ -11,26 +11,26 @@ interface ButtonProps extends HTMLMotionProps<"button"> {
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = "primary", size = "default", ...props }, ref) => {
     const variants = {
-      primary: "bg-blue-500 text-white hover:bg-blue-600 shadow-blue-500/50",
-      secondary: "bg-purple-500 text-white hover:bg-purple-600 shadow-purple-500/50",
-      danger: "bg-red-500 text-white hover:bg-red-600 shadow-red-500/50",
-      success: "bg-green-500 text-white hover:bg-green-600 shadow-green-500/50",
-      ghost: "bg-transparent text-slate-600 hover:bg-slate-100 shadow-none",
+      primary: "bg-[var(--color-signal)] text-white shadow-[var(--shadow-bevel)] active:shadow-[var(--shadow-bevel-pressed)] border border-[var(--color-chrome-indigo)]",
+      secondary: "bg-[var(--color-amber)] text-[var(--color-carbon)] shadow-[var(--shadow-bevel)] active:shadow-[var(--shadow-bevel-pressed)] border border-[var(--color-chrome-indigo)]",
+      danger: "bg-[var(--color-error)] text-white shadow-[var(--shadow-bevel)] active:shadow-[var(--shadow-bevel-pressed)] border border-[var(--color-chrome-indigo)]",
+      success: "bg-[var(--color-systems-teal)] text-white shadow-[var(--shadow-bevel)] active:shadow-[var(--shadow-bevel-pressed)] border border-[var(--color-chrome-indigo)]",
+      ghost: "bg-[var(--color-carbon)] text-white shadow-[var(--shadow-bevel)] active:shadow-[var(--shadow-bevel-pressed)] border border-black",
     }
 
     const sizes = {
-      default: "h-12 px-6 py-2 text-lg",
-      lg: "h-16 px-8 py-4 text-xl",
-      xl: "h-24 px-12 py-6 text-3xl font-bold",
+      default: "h-[28px] px-4 py-1 text-[11px]",
+      lg: "h-[36px] px-6 py-2 text-[13px]",
+      xl: "h-[48px] px-8 py-3 text-[15px] font-bold",
     }
 
     return (
       <motion.button
         ref={ref}
         whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.95 }}
+        whileTap={{ scale: 0.95, y: 1 }}
         className={cn(
-          "inline-flex items-center justify-center rounded-2xl font-semibold transition-colors focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 shadow-lg",
+          "inline-flex items-center justify-center rounded-[2px] font-bold uppercase tracking-[0.5px] transition-colors focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50",
           variants[variant],
           sizes[size],
           className

@@ -1,12 +1,110 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap'); /* 레트로 픽셀 폰트 (마이크로 라벨용) */
 
 @theme {
-  --color-slate-50: #f8fafc;
-  --color-slate-900: #0f172a;
+  /* Colors */
+  --color-primary: #e60012; /* Nintendo Red */
+  --color-signal: #f68d1f; /* Signal Orange (Forward cues) */
+  --color-amber: #ecab37; /* Amber (Utility buttons) */
+  --color-nav-gold: #e48600; /* Nav Gold */
+  
+  --color-canvas: #7a8aba; /* Periwinkle metallic (Base body) */
+  --color-canvas-soft: #9fbee7; /* Pale Sky */
+  --color-sky: #9fbee7;
+  --color-lavender: #acace7;
+  --color-ice: #c0d5e6;
+  --color-periwinkle: #8ba1d4; /* Light Periwinkle */
+  
+  --color-chrome-indigo: #3d4f97; /* Beveled borders, tab edges */
+  --color-muted-indigo: #60619c; /* Inactive tabs */
+  --color-platinum: #dedede; /* Content surface */
+  --color-surface: #ffffff; /* White content cards */
+  --color-carbon: #21242e; /* Nav bar, footer */
+  --color-hairline: #5a5f8c;
+  
+  --color-ink: #21242e;
+  --color-ink-soft: #3d4f97;
+  --color-on-primary: #ffffff;
+  
+  --color-systems-teal: #206479;
+  --color-games-red: #a7282b;
+  --color-error: #e60012;
+
+  /* Typography */
+  --font-sans: Arial, Helvetica, sans-serif;
+  --font-display: "Arial Black", Arial, sans-serif;
+  --font-pixel: 'VT323', monospace;
+
+  /* Bevel Shadows */
+  --shadow-bevel: inset 0px 2px 0px rgba(255, 255, 255, 0.4), inset 0px -2px 0px var(--color-chrome-indigo);
+  --shadow-bevel-pressed: inset 0px 2px 0px var(--color-chrome-indigo), inset 0px -2px 0px rgba(255, 255, 255, 0.4);
 }
 
-body {
-  background-color: var(--color-slate-50);
-  color: var(--color-slate-900);
-  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+@layer base {
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    margin: 0;
+    /* 카본 배경에 도트 무늬(스피커 그릴 느낌)를 주려면 특정 클래스에서 사용 */
+  }
+
+  /* 닌텐도 레트로 감성 베벨(Bevel) 유틸리티 클래스 */
+  .nintendo-panel {
+    background-color: var(--color-canvas);
+    border: 1px solid var(--color-chrome-indigo);
+    box-shadow: var(--shadow-bevel);
+    /* 깎아낸 듯한 모서리 */
+    border-radius: 0px; 
+  }
+
+  .nintendo-button {
+    background-color: var(--color-amber);
+    color: var(--color-carbon);
+    font-weight: bold;
+    text-transform: uppercase;
+    border: 1px solid var(--color-chrome-indigo);
+    box-shadow: var(--shadow-bevel);
+    cursor: pointer;
+    border-radius: 2px;
+  }
+  
+  .nintendo-button:active {
+    box-shadow: var(--shadow-bevel-pressed);
+    transform: translateY(1px);
+  }
+
+  .nintendo-button-primary {
+    background-color: var(--color-signal);
+    color: var(--color-on-primary);
+  }
+  
+  .nintendo-carbon-bar {
+    background-color: var(--color-carbon);
+    color: var(--color-canvas-soft);
+    /* Halftone dot texture simulation */
+    background-image: radial-gradient(var(--color-muted-indigo) 1px, transparent 1px);
+    background-size: 4px 4px;
+  }
+
+  .nintendo-title {
+    font-family: var(--font-display);
+    color: var(--color-on-primary);
+    text-transform: uppercase;
+    text-shadow: 
+      -1px -1px 0 var(--color-chrome-indigo),
+       1px -1px 0 var(--color-chrome-indigo),
+      -1px  1px 0 var(--color-chrome-indigo),
+       1px  1px 0 var(--color-chrome-indigo),
+       2px  2px 0 var(--color-chrome-indigo),
+       3px  3px 0 var(--color-chrome-indigo);
+  }
+
+  .nintendo-input {
+    background-color: var(--color-surface);
+    color: var(--color-ink);
+    border: 1px solid var(--color-chrome-indigo);
+    border-radius: 2px;
+    box-shadow: inset 0 2px 0 rgba(0,0,0,0.1);
+  }
 }

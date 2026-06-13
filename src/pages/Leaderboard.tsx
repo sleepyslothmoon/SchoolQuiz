@@ -9,7 +9,7 @@ export default function Leaderboard() {
   const { room, loading } = useRoom(pin);
   const { animals } = useAnimals(room?.id);
 
-  if (loading || !room) return <div className="p-8 text-center">로딩중...</div>;
+  if (loading || !room) return <div className="p-8 text-center font-pixel text-[var(--color-ink-soft)] uppercase text-2xl">Loading...</div>;
 
   const sortedAnimals = [...animals]
     .filter(a => a.isTaken)
@@ -19,10 +19,10 @@ export default function Leaderboard() {
   const emojis = ['🐶', '🐱', '🐭', '🐹', '🐰', '🦊', '🐻', '🐼', '🐨', '🐯', '🦁', '🐮', '🐷', '🐸', '🐵', '🐔', '🐧', '🐦', '🐤', '🦆', '🦅', '🦉', '🦇', '🐺', '🐗', '🐴', '🦄', '🐝', '🐛', '🦋', '🐌', '🐞', '🐜', '🐢', '🐍', '🦎', '🦖', '🦕', '🐙', '🦑', '🦐', '🦞', '🦀', '🐡', '🐠', '🐟', '🐬', '🐳', '🐋', '🦈', '🐊', '🐅', '🐆', '🦓', '🦍', '🦧', '🐘', '🦛', '🦏', '🐪'];
 
   const getMedalColor = (index: number) => {
-    if (index === 0) return 'bg-yellow-400 text-yellow-900 border-yellow-500'; // Gold
-    if (index === 1) return 'bg-slate-300 text-slate-800 border-slate-400'; // Silver
-    if (index === 2) return 'bg-amber-600 text-amber-100 border-amber-700'; // Bronze
-    return 'bg-blue-100 text-blue-800 border-blue-200';
+    if (index === 0) return 'bg-[var(--color-nav-gold)] text-white border-[var(--color-chrome-indigo)] shadow-[var(--shadow-bevel)]'; // Gold
+    if (index === 1) return 'bg-[var(--color-platinum)] text-[var(--color-carbon)] border-[var(--color-chrome-indigo)] shadow-[var(--shadow-bevel)]'; // Silver
+    if (index === 2) return 'bg-[var(--color-amber)] text-[var(--color-carbon)] border-[var(--color-chrome-indigo)] shadow-[var(--shadow-bevel)]'; // Bronze
+    return 'bg-[var(--color-canvas)] text-white border-[var(--color-chrome-indigo)] shadow-[var(--shadow-bevel)]';
   };
 
   const getPodiumHeight = (index: number) => {
@@ -33,13 +33,13 @@ export default function Leaderboard() {
   };
 
   return (
-    <div className="min-h-screen p-4 md:p-8 bg-indigo-50">
+    <div className="min-h-screen p-4 md:p-8 bg-[var(--color-canvas)]">
       <div className="mx-auto max-w-5xl text-center">
-        <h1 className="text-4xl md:text-6xl font-black text-indigo-600 mb-12 drop-shadow-sm">
+        <h1 className="text-4xl md:text-5xl mb-12 nintendo-title">
           🏆 최종 순위 발표 🏆
         </h1>
 
-        <div className="flex items-end justify-center gap-2 md:gap-4 h-[60vh]">
+        <div className="flex items-end justify-center gap-2 md:gap-4 h-[60vh] border-b-2 border-[var(--color-chrome-indigo)] pb-0">
           {sortedAnimals.map((animal, index) => {
             const emojiIndex = parseInt(animal.iconId.split('_')[1], 10);
             return (
@@ -48,25 +48,25 @@ export default function Leaderboard() {
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.2 }}
-                className="flex flex-col items-center justify-end w-24 md:w-32"
+                className="flex flex-col items-center justify-end w-20 md:w-32"
               >
-                <div className="text-4xl md:text-6xl mb-4 animate-bounce">
+                <div className="text-4xl md:text-6xl mb-4 animate-bounce filter drop-shadow-md">
                   {emojis[emojiIndex]}
                 </div>
-                <div className="text-xl font-bold mb-2">
+                <div className="text-[12px] md:text-lg font-bold mb-2 text-[var(--color-ink)] bg-white px-2 py-1 rounded-[2px] border border-[var(--color-chrome-indigo)]">
                   {animal.score}점
                 </div>
-                <div className={`w-full rounded-t-lg border-t-4 border-l-4 border-r-4 shadow-lg flex items-start justify-center pt-4 text-2xl font-black ${getMedalColor(index)} ${getPodiumHeight(index)}`}>
-                  {index + 1}등
+                <div className={`w-full border-t border-l border-r flex items-start justify-center pt-4 text-xl md:text-2xl font-black ${getMedalColor(index)} ${getPodiumHeight(index)}`}>
+                  {index + 1}
                 </div>
               </motion.div>
             );
           })}
         </div>
 
-        <div className="mt-12">
-          <button onClick={() => navigate('/')} className="text-indigo-500 font-bold underline text-xl">
-            처음으로 돌아가기
+        <div className="mt-12 bg-[var(--color-carbon)] p-4 border border-black inline-block">
+          <button onClick={() => navigate('/')} className="text-[var(--color-canvas-soft)] font-bold text-[12px] uppercase tracking-wider hover:text-white transition-colors">
+            &lt; GO BACK TO START
           </button>
         </div>
       </div>

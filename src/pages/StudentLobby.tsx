@@ -33,14 +33,14 @@ export default function StudentLobby() {
   }, [room, selectedAnimalId, navigate, pin]);
 
   if (roomLoading || !studentId) {
-    return <div className="flex min-h-screen items-center justify-center text-2xl font-bold text-slate-400">불러오는 중...</div>;
+    return <div className="flex min-h-screen items-center justify-center text-2xl font-bold font-pixel text-[var(--color-ink-soft)] uppercase">Loading...</div>;
   }
 
   if (!room) {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center p-4">
-        <h1 className="mb-4 text-3xl font-bold text-red-500">방을 찾을 수 없습니다 😢</h1>
-        <button onClick={() => navigate('/')} className="text-blue-500 underline">처음으로 돌아가기</button>
+        <h1 className="mb-4 text-3xl font-bold text-[var(--color-error)]">ROOM NOT FOUND</h1>
+        <button onClick={() => navigate('/')} className="text-[var(--color-ink-soft)] underline uppercase font-bold text-xs">GO BACK</button>
       </div>
     );
   }
@@ -63,13 +63,13 @@ export default function StudentLobby() {
 
   return (
     <div className="min-h-screen p-4 md:p-8">
-      <div className="mx-auto max-w-5xl text-center">
+      <div className="mx-auto max-w-5xl text-center flex flex-col items-center">
         {!selectedAnimalId ? (
-          <>
-            <h1 className="mb-2 text-4xl font-extrabold text-blue-600">내 동물을 골라주세요!</h1>
-            <p className="mb-8 text-xl font-medium text-slate-500">원하는 동물을 터치하세요. 한 번 고르면 바꿀 수 없어요.</p>
+          <Card className="w-full bg-[var(--color-periwinkle)] p-6">
+            <h1 className="mb-2 text-3xl nintendo-title tracking-tight text-white">내 동물을 골라주세요!</h1>
+            <p className="mb-8 text-[12px] font-bold text-[var(--color-ink)] uppercase">원하는 동물을 터치하세요. 한 번 고르면 바꿀 수 없어요.</p>
             
-            <div className="grid grid-cols-5 gap-3 sm:grid-cols-6 md:grid-cols-10 md:gap-4">
+            <div className="grid grid-cols-5 gap-3 sm:grid-cols-6 md:grid-cols-10 md:gap-4 bg-[var(--color-platinum)] p-6 rounded-[6px] border border-[var(--color-chrome-indigo)] shadow-[var(--shadow-bevel)]">
               {EMOJIS.map((emoji, index) => {
                 const animalId = `emoji_${index}`;
                 const takenData = animals.find(a => a.iconId === animalId);
@@ -78,15 +78,15 @@ export default function StudentLobby() {
                 return (
                   <motion.button
                     key={index}
-                    whileHover={!isTaken && !selecting ? { scale: 1.1 } : {}}
-                    whileTap={!isTaken && !selecting ? { scale: 0.9 } : {}}
+                    whileHover={!isTaken && !selecting ? { scale: 1.05 } : {}}
+                    whileTap={!isTaken && !selecting ? { scale: 0.95 } : {}}
                     onClick={() => handleSelect(emoji)}
                     disabled={isTaken || selecting}
                     className={`
-                      flex aspect-square items-center justify-center rounded-2xl text-4xl transition-all
+                      flex aspect-square items-center justify-center rounded-[2px] text-4xl border border-[var(--color-chrome-indigo)] transition-all
                       ${isTaken 
-                        ? 'bg-slate-200 opacity-40 grayscale cursor-not-allowed' 
-                        : 'bg-white shadow-md hover:shadow-xl hover:bg-blue-50 cursor-pointer'}
+                        ? 'bg-[var(--color-muted-indigo)] opacity-50 grayscale cursor-not-allowed shadow-[var(--shadow-bevel-pressed)]' 
+                        : 'bg-[var(--color-surface)] shadow-[var(--shadow-bevel)] hover:bg-[var(--color-sky)] cursor-pointer'}
                     `}
                   >
                     {emoji}
@@ -94,17 +94,22 @@ export default function StudentLobby() {
                 );
               })}
             </div>
-          </>
+          </Card>
         ) : (
-          <div className="flex h-[80vh] flex-col items-center justify-center">
-            <Card className="flex flex-col items-center p-12 text-center">
-              <h2 className="mb-8 text-3xl font-bold text-slate-700">준비 완료!</h2>
-              <div className="mb-8 text-8xl">
-                {EMOJIS[parseInt(selectedAnimalId.split('_')[1], 10)]}
+          <div className="flex h-[80vh] flex-col items-center justify-center w-full max-w-md">
+            <Card className="flex flex-col items-center w-full p-0 bg-[var(--color-platinum)] overflow-hidden">
+              <div className="bg-[var(--color-canvas)] text-white text-[11px] font-bold py-2 px-4 text-center uppercase w-full border-b border-[var(--color-chrome-indigo)] shadow-sm">
+                ≡ STATUS: READY
               </div>
-              <p className="text-xl font-medium text-slate-500 animate-pulse">
-                선생님이 퀴즈를 시작할 때까지 기다려주세요...
-              </p>
+              <div className="p-12 flex flex-col items-center">
+                <h2 className="mb-8 text-2xl font-bold text-[var(--color-ink)] uppercase">준비 완료!</h2>
+                <div className="mb-8 text-[8rem] filter drop-shadow-md">
+                  {EMOJIS[parseInt(selectedAnimalId.split('_')[1], 10)]}
+                </div>
+                <div className="bg-[var(--color-surface)] border border-[var(--color-chrome-indigo)] px-4 py-2 rounded-[2px] text-[11px] font-bold text-[var(--color-ink)] animate-pulse uppercase shadow-[var(--shadow-bevel)]">
+                  WAITING FOR TEACHER...
+                </div>
+              </div>
             </Card>
           </div>
         )}

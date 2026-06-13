@@ -8,7 +8,7 @@ import Leaderboard from './pages/Leaderboard';
 
 function App() {
   return (
-    <div className="min-h-screen bg-slate-50 selection:bg-blue-100 font-sans">
+    <div className="min-h-screen bg-[var(--color-canvas)] text-[var(--color-ink)] selection:bg-[var(--color-signal)] selection:text-white font-sans">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/teacher" element={<TeacherDashboard />} />

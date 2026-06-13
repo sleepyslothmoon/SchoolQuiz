@@ -16,30 +16,40 @@ export default function Home() {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center p-4">
-      <Card className="w-full max-w-md p-8 text-center">
-        <h1 className="mb-8 text-4xl font-extrabold text-blue-500">동물 퀴즈 대회! 🦁</h1>
-        
-        <form onSubmit={handleJoin} className="flex flex-col gap-4">
-          <input
-            type="text"
-            maxLength={6}
-            value={pin}
-            onChange={(e) => setPin(e.target.value.replace(/[^0-9]/g, ''))}
-            placeholder="PIN 번호 6자리 입력"
-            className="h-16 rounded-2xl border-4 border-blue-100 bg-blue-50 px-6 text-center text-2xl font-bold tracking-[0.25em] text-blue-900 outline-none transition-colors focus:border-blue-400 focus:bg-white"
-          />
-          <Button size="lg" type="submit" disabled={pin.length !== 6}>
-            입장하기
-          </Button>
-        </form>
+      {/* 닌텐도의 마스코트 버블 느낌 */}
+      <div className="mb-4 bg-white rounded-[10px] px-4 py-2 border border-[var(--color-chrome-indigo)] shadow-sm self-center">
+        <span className="font-pixel text-[13px] text-[var(--color-carbon)] font-bold">WELCOME TO ANIMAL QUIZ.COM!</span>
+      </div>
 
-        <div className="mt-12 text-sm text-slate-400">
-          <button 
-            onClick={() => navigate('/teacher')}
-            className="hover:text-slate-600 underline"
-          >
-            선생님이신가요? 교사용 화면으로 가기
-          </button>
+      <Card className="w-full max-w-md bg-[var(--color-lavender)] border-[var(--color-chrome-indigo)]">
+        <div className="p-8 text-center flex flex-col items-center">
+          <h1 className="mb-8 text-4xl nintendo-title tracking-tight">동물 퀴즈 대회! 🦁</h1>
+          
+          <form onSubmit={handleJoin} className="flex flex-col gap-4 w-full bg-[var(--color-platinum)] p-6 rounded-[6px] border border-[var(--color-chrome-indigo)] shadow-[var(--shadow-bevel)]">
+            <div className="bg-[var(--color-canvas)] text-white text-[11px] font-bold py-1 px-2 text-left uppercase w-full">
+              ≡ JOIN ROOM
+            </div>
+            <input
+              type="text"
+              maxLength={6}
+              value={pin}
+              onChange={(e) => setPin(e.target.value.replace(/[^0-9]/g, ''))}
+              placeholder="PIN 번호 6자리"
+              className="nintendo-input h-10 px-4 text-center text-[15px] font-bold tracking-[0.25em] outline-none w-full"
+            />
+            <Button size="lg" type="submit" disabled={pin.length !== 6} className="w-full">
+              입장하기
+            </Button>
+          </form>
+
+          <div className="mt-8 text-xs text-[var(--color-ink-soft)] font-bold">
+            <button 
+              onClick={() => navigate('/teacher')}
+              className="hover:text-[var(--color-signal)] underline uppercase"
+            >
+              TEACHER DASHBOARD
+            </button>
+          </div>
         </div>
       </Card>
     </div>

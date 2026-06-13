@@ -10,7 +10,7 @@ const Card = React.forwardRef<HTMLDivElement, HTMLMotionProps<"div">>(
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       className={cn(
-        "rounded-3xl border border-slate-200 bg-white text-slate-950 shadow-xl shadow-slate-200/50",
+        "rounded-[6px] border border-[var(--color-chrome-indigo)] bg-[var(--color-platinum)] text-[var(--color-ink)] shadow-[var(--shadow-bevel)] overflow-hidden",
         className
       )}
       {...props}
