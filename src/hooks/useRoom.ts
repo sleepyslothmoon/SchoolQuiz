@@ -35,7 +35,17 @@ export function useRoom(pin?: string) {
       currentQuestion: 0,
       createdAt: Date.now(),
     };
-    const docRef = await addDoc(collection(db, 'Rooms'), newRoom);
+    
+    // Create a timeout promise to prevent infinite hanging
+    const timeoutPromise = new Promise((_, reject) => 
+      setTimeout(() => reject(new Error("서버 응답 시간 초과 (5초). Firebase 설정이 올바르게 적용되었는지 확인해주세요.")), 5000)
+    );
+    
+    const docRef = await Promise.race([
+      addDoc(collection(db, 'Rooms'), newRoom),
+      timeoutPromise
+    ]) as any;
+    
     return { id: docRef.id, ...newRoom };
   };
 
