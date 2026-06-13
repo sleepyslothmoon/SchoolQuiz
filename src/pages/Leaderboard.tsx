@@ -1,7 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useRoom } from '../hooks/useRoom';
 import { useAnimals } from '../hooks/useAnimals';
-import { Card } from '../components/ui/Card';
 import { motion } from 'framer-motion';
 
 export default function Leaderboard() {

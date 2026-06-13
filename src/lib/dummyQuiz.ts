@@ -1,4 +1,4 @@
-import { Quiz } from '../types';
+import type { Quiz } from '../types';
 
 export const DUMMY_QUIZ: Quiz = {
   id: 'nonsense-101',

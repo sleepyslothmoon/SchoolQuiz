@@ -11,7 +11,7 @@ export default function QuizView() {
   const { pin } = useParams();
   const navigate = useNavigate();
   const { room, loading } = useRoom(pin);
-  const { studentId, getSelectedAnimal } = useStudentSession();
+  const { getSelectedAnimal } = useStudentSession();
   const { submitScore } = useAnimals(room?.id);
   
   const [selectedOption, setSelectedOption] = useState<number | null>(null);

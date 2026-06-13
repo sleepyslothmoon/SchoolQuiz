@@ -23,12 +23,12 @@ export default function StudentLobby() {
   const { animals, selectAnimal } = useAnimals(room?.id);
   const [selecting, setSelecting] = useState(false);
 
-  const selectedAnimalId = room ? getSelectedAnimal(room.id) : undefined;
+  const selectedAnimalId = room?.id ? getSelectedAnimal(room.id) : undefined;
 
   useEffect(() => {
     // If room status changes to QUESTION, navigate to quiz view
     if (room && room.status === 'QUESTION' && selectedAnimalId) {
-      navigate(`/room/${pin}/quiz`);
+      navigate(`/room/${pin || ''}/quiz`);
     }
   }, [room, selectedAnimalId, navigate, pin]);
 

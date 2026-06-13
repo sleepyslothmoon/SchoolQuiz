@@ -1,24 +1,14 @@
-import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/ui/Button';
 import { Card } from '../components/ui/Card';
 import { useRoom } from '../hooks/useRoom';
-import { useAnimals } from '../hooks/useAnimals';
-import { DUMMY_QUIZ } from '../lib/dummyQuiz';
 
 export default function TeacherDashboard() {
-  const { createRoom, room, updateRoomStatus } = useRoom();
-  const [currentPin, setCurrentPin] = useState<string | null>(null);
-  const { animals } = useAnimals(room?.id);
+  const { createRoom } = useRoom();
   const navigate = useNavigate();
 
   const handleCreateRoom = async () => {
     const newRoom = await createRoom();
-    setCurrentPin(newRoom.pin);
-    // Reload page with ?pin=XXX to maintain state if we wanted, 
-    // but since useRoom uses parameter pin we can just use the created room state 
-    // Wait, useRoom hook takes `pin` as argument to subscribe. 
-    // Since we call createRoom(), we should probably redirect to ?pin=XXX or /teacher/room/XXX
     navigate(`/teacher/room/${newRoom.pin}`);
   };
 
