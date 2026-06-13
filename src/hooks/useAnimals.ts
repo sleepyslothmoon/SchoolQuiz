@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { db } from '../lib/firebase';
 import { collection, onSnapshot, doc, runTransaction, query } from 'firebase/firestore';
-import { Animal } from '../types';
+import type { Animal } from '../types';
 
 export function useAnimals(roomId?: string) {
   const [animals, setAnimals] = useState<Animal[]>([]);

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { db } from '../lib/firebase';
-import { collection, query, where, onSnapshot, addDoc, updateDoc, doc, getDocs, limit } from 'firebase/firestore';
-import { Room } from '../types';
+import { collection, query, where, onSnapshot, addDoc, updateDoc, doc, limit } from 'firebase/firestore';
+import type { Room } from '../types';
 
 export function useRoom(pin?: string) {
   const [room, setRoom] = useState<Room | null>(null);
