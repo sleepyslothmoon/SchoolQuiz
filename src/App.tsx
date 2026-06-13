@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import TeacherDashboard from './pages/TeacherDashboard';
+import TeacherRoom from './pages/TeacherRoom';
 import StudentLobby from './pages/StudentLobby';
 import QuizView from './pages/QuizView';
 import Leaderboard from './pages/Leaderboard';
@@ -11,6 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/teacher" element={<TeacherDashboard />} />
+        <Route path="/teacher/room/:pin" element={<TeacherRoom />} />
         <Route path="/room/:pin" element={<StudentLobby />} />
         <Route path="/room/:pin/quiz" element={<QuizView />} />
         <Route path="/room/:pin/leaderboard" element={<Leaderboard />} />
