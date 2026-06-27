@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/ui/Button';
 import { Card } from '../components/ui/Card';
@@ -6,6 +6,12 @@ import { Card } from '../components/ui/Card';
 export default function Home() {
   const [pin, setPin] = useState('');
   const navigate = useNavigate();
+
+  // 메인 화면에 올 때마다 이전 세션(학생 정보)을 초기화해서 다중 접속 테스트가 쉽도록 함
+  useEffect(() => {
+    sessionStorage.removeItem('quiz_student_id');
+    sessionStorage.removeItem('quiz_animal_selections');
+  }, []);
 
   const handleJoin = (e: React.FormEvent) => {
     e.preventDefault();
